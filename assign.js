@@ -6,7 +6,12 @@ const API_PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.get('/api/getPerson', async (req, res) => {
+app.post('/api/getPerson', async (req, res) => {
+    const result = await dbOperation.getPerson(req.body.ID);
+    console.log(result);
+    
+});
+app.get('/api/getAllPerson', async (req, res) => {
     const result = await dbOperation.getAllPerson();
     res.json(result.recordset);
 });

@@ -2,6 +2,18 @@ const config        = require('./dbConfig')
 
 sql                 = require('mssql')
 
+const getPerson = async (ID) => {
+  try {
+    let pool = await sql.connect(config);
+    let persons = await pool.request().query(`SELECT * FROM Person Where ID = ${ID}`);
+    console.log(persons);
+    return persons;
+  }
+   catch (error) {
+    console.error('Error fetching person By ID:', error);
+  }
+}
+
 const getAllPerson = async () => {
   try {
     let pool = await sql.connect(config);
@@ -44,6 +56,7 @@ const updatePerson = async(Person) => {
   }
 }
 module.exports = {
+    getPerson,
     getAllPerson,
     createPerson,
     deletePerson,

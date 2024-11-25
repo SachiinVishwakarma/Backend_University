@@ -20,6 +20,18 @@ function Frontend() {
         }));
       }
 
+      const getPerson=async()=>{
+        const newData=await fetch ('/api/getPerson',{
+          method:'POST',
+          headers:{
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body:JSON.stringify({
+            ID: person.ID
+          })
+        })
+      }
   const createPerson = async () => {
     console.log('Creating Employee:', person);
     const newData = await fetch('/api/createPerson', {
@@ -72,6 +84,7 @@ function Frontend() {
           <input type="text" name="Mobile_number" placeholder="mobile" onChange={setInput}></input>
           <input type="text" name="STATE" placeholder="State" onChange={setInput}></input>
           <br></br>
+          <button onClick={getPerson}>get Person</button>
           <button onClick={createPerson}>Create Person</button>
           <button onClick={deletePerson}>Delete Person</button>
           <button onClick={updatePerson}>Update Person</button>
