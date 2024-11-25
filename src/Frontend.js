@@ -50,8 +50,8 @@ function Frontend() {
     }).then(res=>res.json());
     setReturnedData(newData[0]||{});
   }
-  const updateEmployee = async () => {
-    const updatedData = await fetch('/update', {
+  const updatePerson = async () => {
+    const updatedData = await fetch('/api/updatePerson', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -74,7 +74,7 @@ function Frontend() {
           <br></br>
           <button onClick={createPerson}>Create Person</button>
           <button onClick={deletePerson}>Delete Person</button>
-          <button onClick={updateEmployee}>Update Person</button>
+          <button onClick={updatePerson}>Update Person</button>
         </div>
     </div>
   );

@@ -36,7 +36,7 @@ const updatePerson = async(Person) => {
   try {
       let pool = await sql.connect(config);
       let persons = await pool.request()
-      .query(`UPDATE Student SET Name = '${Person.NAME}', Mobile_number = ${Person.Mobile_number} WHERE ID = ${Pdddderson.ID}`);
+      .query(`UPDATE Person SET NAME = '${Person.NAME}', Mobile_number = ${Person.Mobile_number}, STATE = '${Person.STATE}'  WHERE ID = ${Person.ID}`);
       return persons;
   }
   catch(error) {
