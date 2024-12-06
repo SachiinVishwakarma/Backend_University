@@ -2,7 +2,7 @@ const express      = require('express'),
      dbOperation = require('./Assignment/dbOperations')
       cors         = require('cors');
 
-const API_PORT = process.env.PORT || 5000;
+const API_PORT = process.env.PORT || 8000;
 const app = express();
 app.use(cors());
 app.use(express.json());
