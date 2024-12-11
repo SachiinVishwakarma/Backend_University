@@ -4,7 +4,7 @@ const express      = require('express'),
     dbOperation = require('./dbFiles/dbOperation')
     cors         = require('cors');
 
-const API_PORT = process.env.PORT || 5000;
+const API_PORT = process.env.PORT || 8000;
 const app = express();
 
 let client;
@@ -17,7 +17,7 @@ app.use(cors());
 app.get('/api/employees', async (req, res) => {
     const result = await dbOperation.getAllEmployees(); // Fetch all employees
     res.json(result.recordset);
-  });
+});
 
 app.post('/api', async(req,res)=> {
     console.log('Called');
