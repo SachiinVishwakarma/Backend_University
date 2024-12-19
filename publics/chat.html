@@ -3,11 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APP</title>
+    <title>Chat App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-box {
+            width: 400px;
+            max-width: 100%;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        #messages {
+            list-style: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 0;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        #messages li {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 6px;
+            max-width: 70%;
+        }
+        .message-sachin {
+            background-color: #d4edda;
+            margin-left: auto;
+            text-align: right;
+        }
+        .message-tamana {
+            background-color: #f8d7da;
+            margin-right: auto;
+        }
+        .input-container {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-radius: 0;
+        }
+        .input-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0;
+        }
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="font-size: 200px;">
-        priyanka loves  chinu 
-    </h1>
+    <div class="chat-box">
+        <ul id="messages"></ul>
+        <div class="input-container">
+            <input id="messageInput" type="text" placeholder="Type a message">
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const messagesList = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Append messages to the chatbox
+        function appendMessage(message, sender) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            li.classList.add(sender === 'Sachin' ? 'message-sachin' : 'message-tamana');
+            messagesList.appendChild(li);
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
+
+        // Listen for chat messages
+        socket.on("chatMessage", (data) => {
+            appendMessage(`${data.name}: ${data.message}`, data.name);
+        });
+
+        // Send chat messages
+        sendButton.addEventListener("click", () => {
+            const msg = messageInput.value.trim();
+            if (msg) {
+                socket.emit("chatMessage", msg);
+                messageInput.value = ""; // Clear input field
+            }
+        });
+
+        // Send message on Enter key press
+        messageInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                sendButton.click();
+            }
+        });
+    </script>
 </body>
 </html>

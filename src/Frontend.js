@@ -21,7 +21,7 @@ function Frontend() {
       }
 
       const getPerson=async()=>{
-        const newData=await fetch ('/api/getPerson',{
+        const newData=await fetch ('http://localhost:8000/api/getPerson',{
           method:'POST',
           headers:{
             'content-type': 'application/json',
