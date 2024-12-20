@@ -23,8 +23,7 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
     console.log("User connected to secondary server:", socket.id);
 
-    // Register the user as "Rahul"
-    const name = "Tamana";
+    const name = "P";
     // Pass the name to the primary server
     primaryServer.emit("new-user-join", name);
 

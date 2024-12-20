@@ -6,8 +6,9 @@
     <title>Chat App</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2e;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,60 +17,95 @@
         }
         .chat-box {
             width: 400px;
+            height: 500px; /* Fixed height for the chat box */
             max-width: 100%;
-            margin: 50px auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(145deg, #2a2a3d, #1a1a2b);
+            border-radius: 12px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4), inset 0px 3px 5px rgba(255, 255, 255, 0.1);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         #messages {
             list-style: none;
-            padding: 0;
-            max-height: 300px;
+            padding: 15px;
+            flex: 1; /* Makes the messages area grow to fill available space */
+            max-height: calc(100% - 60px); /* Subtracting the height of the input container */
             overflow-y: auto;
             margin: 0;
-            padding: 10px;
-            background-color: #fafafa;
+            background-color: #282838;
+            border-bottom: 1px solid #3a3a5a;
         }
         #messages li {
             margin: 10px 0;
-            padding: 8px;
-            border-radius: 6px;
-            max-width: 70%;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 75%;
+            font-size: 14px;
+            line-height: 1.4;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
         .message-sachin {
-            background-color: #d4edda;
+            background: linear-gradient(145deg, #3a3a5a, #2a2a4a);
+            color: #00ff99;
             margin-left: auto;
             text-align: right;
         }
         .message-tamana {
-            background-color: #f8d7da;
+            background: linear-gradient(145deg, #5a2a2a, #4a1a1a);
+            color: #ff6699;
             margin-right: auto;
+            text-align: left;
         }
         .input-container {
             display: flex;
-            border-top: 1px solid #ddd;
+            background-color: #202030;
+            border-top: 1px solid #3a3a5a;
+            
         }
         .input-container input {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
+            background: #1a1a2b;
+            color: #ffffff;
             border: none;
             outline: none;
-            border-radius: 0;
+            font-size: 14px;
+        }
+        .input-container input::placeholder {
+            color: #8888aa;
         }
         .input-container button {
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: 12px 20px;
+            background: linear-gradient(145deg, #00aaff, #0066ff);
             color: white;
             border: none;
             cursor: pointer;
-            border-radius: 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
         }
         .input-container button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(145deg, #0066ff, #0044cc);
+        }
+        .input-container button:active {
+            transform: scale(0.95);
+        }
+        #messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        #messages::-webkit-scrollbar-thumb {
+            background: #555577;
+            border-radius: 4px;
+        }
+        #messages::-webkit-scrollbar-track {
+            background: #202030;
         }
     </style>
+    
+    
 </head>
 <body>
     <div class="chat-box">
@@ -92,7 +128,7 @@
         function appendMessage(message, sender) {
             const li = document.createElement('li');
             li.textContent = message;
-            li.classList.add(sender === 'Sachin' ? 'message-sachin' : 'message-tamana');
+            li.classList.add(sender === 'Chinu' ? 'message-sachin' : 'message-tamana');
             messagesList.appendChild(li);
             messagesList.scrollTop = messagesList.scrollHeight;
         }
