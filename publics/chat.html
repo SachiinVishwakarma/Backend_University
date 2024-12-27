@@ -128,7 +128,7 @@
         function appendMessage(message, sender) {
             const li = document.createElement('li');
             li.textContent = message;
-            li.classList.add(sender === 'Chinu' ? 'message-sachin' : 'message-tamana');
+            li.classList.add(sender === 'Sachin' ? 'message-sachin' : 'message-tamana');
             messagesList.appendChild(li);
             messagesList.scrollTop = messagesList.scrollHeight;
         }
